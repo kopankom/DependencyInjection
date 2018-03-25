@@ -1,0 +1,3 @@
+class DependencyInjection():
+
+    pass

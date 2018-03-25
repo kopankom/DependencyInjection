@@ -1,0 +1,8 @@
+services:
+    existing_pages_directory: 'TEST SD'
+    app_bundle_param_handler:
+        class: AppBundle.Handler.ParamHandler
+        arguments:
+            - '@serializer'
+            - '%existing_pages_directory%'
+            - 'Third argument'

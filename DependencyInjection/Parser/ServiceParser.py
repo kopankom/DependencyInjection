@@ -1,0 +1,2 @@
+class ServiceParser():
+    pass
