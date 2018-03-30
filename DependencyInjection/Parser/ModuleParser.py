@@ -1,0 +1,2 @@
+class ModuleParser():
+    pass

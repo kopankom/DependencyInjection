@@ -1,2 +1,5 @@
+parameters:
+    di_core_src_dir: 'src'
+
 modules:
     AppBundle: 'AppBundle'
