@@ -1,7 +1,7 @@
 import importlib
 
 
-class ClassLoader():
+class ClassExecutor():
     class_indicator = None
     class_instance = None
 

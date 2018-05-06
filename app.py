@@ -1,7 +1,6 @@
-import importlib
 import yaml
 
-from DependencyInjection.ClassLoader.ClassLoader import ClassLoader
+from DependencyInjection.ClassLoader.ClassExecutor import ClassExecutor
 from DependencyInjection.Parser.ConfigParser import ConfigParser
 
 if __name__ == '__main__':
@@ -9,7 +8,7 @@ if __name__ == '__main__':
     pName = 'param'
     pValue = ' John '
     params = {pName : pValue}
-    class_loader = ClassLoader()
+    class_loader = ClassExecutor()
     class_loader.set_module_path(module_path)
     class_loader.create_class_instance({'constructor_parameters' : 'changed argument constructoe'})
     class_loader.execute_function('handle', params)

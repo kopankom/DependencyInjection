@@ -1,4 +1,4 @@
-class FileLoader():
+class FileResolver():
     base_path = 'src'
     replace_prefix_list = {}
     concatenation_char_for_class_path = ':'

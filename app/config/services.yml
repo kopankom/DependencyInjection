@@ -1,8 +1,6 @@
 services:
-    existing_pages_directory: 'TEST SD'
-    app_bundle_param_handler:
-        class: AppBundle.Handler.ParamHandler
+    mongodb:
+        class: AppBundle.Database.MongoDB
         arguments:
-            - '@serializer'
-            - '%existing_pages_directory%'
-            - 'Third argument'
+            - '%db.mongo.host%'
+            - '%db.mongo.dbname%'

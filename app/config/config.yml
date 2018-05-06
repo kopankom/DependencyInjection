@@ -1,3 +1,8 @@
+db:
+    mongo:
+        host: 192
+        dbname: 'mean-dev'
+
 bm_comments:
     facebook_api_id: '123434554'
     facebook:
@@ -25,3 +30,4 @@ bm_comments:
           - '%bm_comments.facebook_api_id%'
           - 'tested'
     other_value: '%bm_comments.some_nested.nested1.nested2%'
+
