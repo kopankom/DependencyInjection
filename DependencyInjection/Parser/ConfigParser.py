@@ -5,7 +5,11 @@ class ConfigParser():
     VARIABLE_CHARACTER = '%'
     VARIABLE_FORMAT = VARIABLE_CHARACTER + '{}' + VARIABLE_CHARACTER
     VARIABLE_REGEX = VARIABLE_CHARACTER + '([a-zA-Z0-9\.\_]+)' + VARIABLE_CHARACTER
+
     original_config_object = None
+
+    def __init__(self, yaml_object):
+        self.original_config_object = yaml_object
 
     def _prepare_value(self, value):
         if (self._has_variable(value)):
@@ -38,9 +42,6 @@ class ConfigParser():
         del splittedValue[0]
         newKey = '.'.join(splittedValue)
         return self.get_value_from_config(newKey, newConfigArray)
-
-    def set_yaml_object(self, yaml_object):
-        self.original_config_object = yaml_object
 
     def get_config_by_yaml_object(self, yaml_object=None):
         if None == yaml_object:
