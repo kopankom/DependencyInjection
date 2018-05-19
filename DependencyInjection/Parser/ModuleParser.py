@@ -1,8 +1,7 @@
-class ModuleParser():
-    original_config_object = None
+from DependencyInjection.ParameterBag import ParameterBag
+from DependencyInjection.Parser.YamlParser import YamlParser
 
-    def __init__(self, yaml_object):
-        self.original_config_object = yaml_object
 
-    def get_container(self):
-        pass
+class ModuleParser(YamlParser):
+
+    pass

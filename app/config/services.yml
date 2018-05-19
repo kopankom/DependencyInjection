@@ -2,5 +2,18 @@ services:
     mongodb:
         class: AppBundle.Database.MongoDB
         arguments:
-            - '%db.mongo.host%'
-            - '%db.mongo.dbname%'
+            db_host: '%db.mongo.host%'
+            db_name: '%db.mongo.dbname%'
+        calls:
+            setPassword:
+               password: '%db.mongo.dbname%'
+
+    aws:
+        class: AppBundle.AWS.Aws
+        arguments:
+            one: 'one param'
+            two: '@mongodb'
+        calls:
+            setMongo:
+                mongo: '@mongodb'
+
