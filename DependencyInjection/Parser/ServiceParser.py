@@ -22,14 +22,17 @@ class ServiceParser(YamlParser):
                 service_name = object[key].replace('@', '')
                 if self.container.has(service_name):
                     object[key] = self.container.get(service_name)
-                    print('mam w kontenerze servis', service_name)
+                else:
+                    raise Exception("No service:", service_name)
                 print("starts with", object[key])
             else:
                 object[key] = self.config._prepare_value(object[key])
         return object
 
     def iterate_through_file(self):
+        print(self.original_config_object)
         for config_key in self.original_config_object:
+            print("config key: ", config_key)
             current_object = self.original_config_object[config_key]
             class_loader = ClassExecutor()
             class_loader.set_module_path(self.file_resolver.build_class_path(current_object['class']))

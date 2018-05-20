@@ -28,8 +28,14 @@ class DependencyInjection():
         self.container = self.service_parser.container
 
     def load_yaml_file(self, filename):
-        f = open(filename, "r")
-        return yaml.load(f.read())
+        content = ''
+        with open(filename) as inp:
+            content = yaml.load(inp.read())
+        # f = open(filename, "r")
+        # # f = file(filename, "r")
+        # content = f.read()
+        # print(content)
+        return content # yaml.safe_load(content)
 
     def load_modules_definitions(self):
         pass

@@ -12,9 +12,16 @@ services:
         arguments:
             json_objects: '@json_objects'
 
+    aws:
+        class: AppBundle.Aws
+        arguments:
+            access_key: '%aws.key%'
+            secret_key: '%aws.secret_key%'
+
     app_main:
         class: AppBundle.AppMain
         arguments:
             json_objects: '@json_objects'
             file_checker: '@file_checker'
             objects_filter: '@objects_filter'
+            aws: '@aws'

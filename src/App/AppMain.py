@@ -7,11 +7,13 @@ class AppMain():
     json_objects = None
     file_checker = None
     objects_filter = None
+    aws = None
 
-    def __init__(self, json_objects, file_checker, objects_filter):
+    def __init__(self, json_objects, file_checker, objects_filter, aws):
         self.json_objects = json_objects.json_objects
         self.file_checker = file_checker
         self.objects_filter = objects_filter
+        self.aws = aws
 
     def check(self):
         for i in self.json_objects:
@@ -31,5 +33,7 @@ class AppMain():
         command = 'wget "{}" -O "{}"'.format(video_url, video_name_out)
         os.system(command)
         self.make_thumbnail(video_name_out, picture_name_out)
+
+        return self.aws.upload_file(picture_name_out, name_out + '.png')
 
 
