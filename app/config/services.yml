@@ -1,19 +1,20 @@
 services:
-    mongodb:
-        class: AppBundle.Database.MongoDB
+    json_objects:
+        class: AppBundle.JsonFile
         arguments:
-            db_host: '%db.mongo.host%'
-            db_name: '%db.mongo.dbname%'
-        calls:
-            setPassword:
-               password: '%db.mongo.dbname%'
+            file_name: '%app.json_file%'
 
-    aws:
-        class: AppBundle.AWS.Aws
+    file_checker:
+        class: AppBundle.FileChecker
+
+    objects_filter:
+        class: AppBundle.ObjectsFilter
         arguments:
-            one: 'one param'
-            two: '@mongodb'
-        calls:
-            setMongo:
-                mongo: '@mongodb'
+            json_objects: '@json_objects'
 
+    app_main:
+        class: AppBundle.AppMain
+        arguments:
+            json_objects: '@json_objects'
+            file_checker: '@file_checker'
+            objects_filter: '@objects_filter'

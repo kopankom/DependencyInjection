@@ -6,10 +6,13 @@ from DependencyInjection.Parser.ServiceParser import ServiceParser
 
 
 class DependencyInjection():
+    service_parser = None
+    config_parser = None
+    container = None
 
     def __init__(self):
         loadedFile = self.load_yaml_file("app/config/config.yml")
-        config_parser = ConfigParser(loadedFile)
+        self.config_parser = ConfigParser(loadedFile)
 
         modulesYaml = self.load_yaml_file("app/config/modules.yml")
         modulesList = modulesYaml['modules']
@@ -19,9 +22,10 @@ class DependencyInjection():
 
         services_yaml_file = self.load_yaml_file('app/config/services.yml')
 
-        service_parser = ServiceParser(services_yaml_file['services'], file_resolver, config_parser)
-        service_parser.iterate_through_file()
-        service_parser.container.get('aws').container_execution()
+        self.service_parser = ServiceParser(services_yaml_file['services'], file_resolver, self.config_parser)
+        self.service_parser.iterate_through_file()
+
+        self.container = self.service_parser.container
 
     def load_yaml_file(self, filename):
         f = open(filename, "r")
