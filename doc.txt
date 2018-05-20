@@ -1,5 +1,0 @@
-https://s3.amazonaws.com/vidii-user-media-uploads/thumbnail_1462288498032_JohnCleeseMakeGodLOL-Small.jpg
-NULL
-http://vidiimedia-dev.s3.amazonaws.com/whatson/picture/775ba3296fc101ae8bfa0c62a030111b-thumbnail.jpg
-http://vidiimedia-dev.s3.amazonaws.com/whatson/picture/8adf0084ea6c46e19a15a1454bc8c78d-thumbnail.jpg
-http://vidiimedia-dev.s3.amazonaws.com/whatson/picture/476c37229cd95c9d637ee19fedffe572-thumbnail.jpg
