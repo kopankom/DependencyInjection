@@ -13,9 +13,6 @@ class ServiceParser(YamlParser):
         self.config = config
         super(ServiceParser, self).__init__(yaml_object)
 
-    def get_container(self):
-        pass
-
     def bind_values(self, object):
         for key in object:
             if object[key].startswith('@'):

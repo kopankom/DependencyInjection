@@ -21,39 +21,27 @@ class YamlParser():
     def _has_variable(self, string):
         return -1 != string.find(self.VARIABLE_CHARACTER)
 
-    def _is_object(self, object):
+    def _is_list_or_dict(self, object):
         return isinstance(object, list) or isinstance(object, dict)
 
     def _obtain_object_indicator(self, indicator1, indicator2, object):
-        try:
-            object[indicator1]
+        if indicator1 in object:
             return indicator1
-        except:
+        else:
             return indicator2
 
-    def get_parameter(self, key, configArray=None):
-        if None == configArray:
-            return self.get_parameter(key, self.original_config_object)
-        if -1 == key.find('.'):
-            return configArray[key]
+    def get_parameter(self, key):
+        return eval("self.arr['" + key.replace(".", "']['") + "']")
 
-        splittedValue = key.split('.')
-        newConfigArray = configArray[splittedValue[0]]
-        del splittedValue[0]
-        newKey = '.'.join(splittedValue)
-        return self.get_parameter(newKey, newConfigArray)
-
-    # def get_parameters(self, yaml_object=None):
-    #     if None == yaml_object:
-    #         yaml_object = self.original_config_object
-    #     if self._is_object(yaml_object):
-    #         iterator = 0
-    #         for i in yaml_object:
-    #             objectIndicator = self._obtain_object_indicator(iterator, i, yaml_object)
-    #             value = yaml_object[objectIndicator]
-    #             iterator += 1
-    #             if isinstance(value, str):
-    #                 yaml_object[objectIndicator] = self._prepare_value(value)
-    #             else:
-    #                 yaml_object[objectIndicator] = self.get_parameters(value)
-    #     return yaml_object
+    def get_value_binded_item(self, item=None):
+        if self._is_list_or_dict(item):
+            iterator = 0
+            for i in item:
+                object_indicatator = self._obtain_object_indicator(iterator, i, item)
+                value = item[object_indicatator]
+                iterator += 1
+                if isinstance(value, str):
+                    item[object_indicatator] = self._prepare_value(value)
+                else:
+                    item[object_indicatator] = self.get_value_binded_item(value)
+        return item

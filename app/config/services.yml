@@ -1,3 +1,15 @@
+parameters:
+    test_str: 'test'
+    test:
+        one:
+            - 'arr1'
+            - 'arr2'
+        two:
+            node1: 'test.one'
+            node2:
+                o1:
+                    o2: '111'
+                o3: '[123]'
 services:
     json_objects:
         class: AppBundle.JsonFile
