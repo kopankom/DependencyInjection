@@ -12,28 +12,12 @@ parameters:
                 o3: '[123]'
 services:
     json_objects:
-        class: AppBundle.JsonFile
+        class: src.App.JsonFile
         arguments:
-            file_name: '%app.json_file%'
+            file_name: '%param1%'
 
     file_checker:
-        class: AppBundle.FileChecker
-
-    objects_filter:
-        class: AppBundle.ObjectsFilter
-        arguments:
-            json_objects: '@json_objects'
-
-    aws:
-        class: AppBundle.Aws
-        arguments:
-            access_key: '%aws.key%'
-            secret_key: '%aws.secret_key%'
-
-    app_main:
-        class: AppBundle.AppMain
-        arguments:
-            json_objects: '@json_objects'
-            file_checker: '@file_checker'
-            objects_filter: '@objects_filter'
-            aws: '@aws'
+        class: src.App.FileChecker
+        calls:
+            check_file:
+                file_url: '@json_objects'

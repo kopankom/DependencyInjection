@@ -1,31 +1,35 @@
 import yaml
 
-from DependencyInjection.FileResolver import FileResolver
-from DependencyInjection.Parser.ConfigParser import ConfigParser
-from DependencyInjection.Parser.ServiceParser import ServiceParser
+from DependencyInjection.Container.ApplicationContainer import ApplicationContainer
+from DependencyInjection.Container.ConfigContainer import ConfigContainer
+from DependencyInjection.Container.ServiceHandler import ServiceHandler
 
 
 class DependencyInjection():
-    service_parser = None
-    config_parser = None
-    container = None
 
     def __init__(self):
         loadedFile = self.load_yaml_file("app/config/config.yml")
-        self.config_parser = ConfigParser(loadedFile)
+        loadedFile1 = self.load_yaml_file("app/config/config1.yml")
+        loadedFileServices = self.load_yaml_file("app/config/services.yml")
+        app = ApplicationContainer()
+        config_handler = ConfigContainer()
+        services_handler = ServiceHandler()
+        app.register_yaml_handler(config_handler)
+        app.register_yaml_handler(services_handler)
+        app.add_file_content(loadedFile)
+        app.add_file_content(loadedFile1)
+        app.add_file_content(loadedFileServices)
 
-        modulesYaml = self.load_yaml_file("app/config/modules.yml")
-        modulesList = modulesYaml['modules']
 
-        file_resolver = FileResolver()
-        file_resolver.replace_prefix_list = modulesList
 
-        services_yaml_file = self.load_yaml_file('app/config/services.yml')
+        print(app.get('services').get_parameter('json_objects').test())
 
-        self.service_parser = ServiceParser(services_yaml_file['services'], file_resolver, self.config_parser)
-        self.service_parser.iterate_through_file()
+        print(app.get('parameters').get_parameter('param6.sub1.test.t1'))
+        print(app.get('parameters').get_parameter('param6.sub0.a1'))
+        print(app.get('parameters').get_parameter('param3.0'))
+        print(app.get('parameters').get_parameter('param3.1'))
+        print(app.get('parameters').get_parameter('param2'))
 
-        self.container = self.service_parser.container
 
     def load_yaml_file(self, filename):
         with open(filename) as input:
