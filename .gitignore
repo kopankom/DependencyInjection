@@ -21,3 +21,7 @@ var/
 *.egg
 MANIFEST
 *.egg-info
+app/config/config.yml
+*.mp4
+*.png
+*.txt

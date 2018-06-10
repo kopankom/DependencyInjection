@@ -1,9 +1,10 @@
 import importlib
 
 
-class ClassLoader():
+class ClassExecutor():
     class_indicator = None
     class_instance = None
+
     def set_module_path(self, module_name):
         module = importlib.import_module(module_name)
         class_name = module_name.split('.')[-1]

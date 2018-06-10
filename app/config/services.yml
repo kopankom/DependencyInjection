@@ -1,8 +1,23 @@
+parameters:
+    test_str: 'test'
+    test:
+        one:
+            - 'arr1'
+            - 'arr2'
+        two:
+            node1: 'test.one'
+            node2:
+                o1:
+                    o2: '111'
+                o3: '[123]'
 services:
-    existing_pages_directory: 'TEST SD'
-    app_bundle_param_handler:
-        class: AppBundle.Handler.ParamHandler
+    json_objects:
+        class: src.App.JsonFile
         arguments:
-            - '@serializer'
-            - '%existing_pages_directory%'
-            - 'Third argument'
+            file_name: '%param1%'
+
+    file_checker:
+        class: src.App.FileChecker
+        calls:
+            check_file:
+                file_url: '@json_objects'
