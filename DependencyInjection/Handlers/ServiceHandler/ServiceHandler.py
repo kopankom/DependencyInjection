@@ -1,11 +1,11 @@
 import re
 
-from DependencyInjection.ClassExecutor import ClassExecutor
-from DependencyInjection.Container.ContainerAbstract import ContainerAbstract
+from DependencyInjection.Handlers.HandlerAbstract import HandlerAbstract
+from DependencyInjection.Handlers.ServiceHandler.ClassExecutor import ClassExecutor
 from DependencyInjection.ParameterBag import ParameterBag
 
 
-class ServiceHandler(ContainerAbstract):
+class ServiceHandler(HandlerAbstract):
     match_regex = '^@([0-9a-zA-Z\.\_\-]+)$'
     yaml_entry_point = 'services'
     replace_pattern = '@{0}'

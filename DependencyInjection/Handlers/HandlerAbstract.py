@@ -1,7 +1,7 @@
 import re
 
 
-class ContainerAbstract():
+class HandlerAbstract():
     match_regex = '^@([0-9a-zA-Z\.\_\-]+)$'
     replace_pattern = '@{0}'
     yaml_entry_point = 'services'
