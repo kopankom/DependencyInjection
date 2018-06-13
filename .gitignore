@@ -21,7 +21,6 @@ var/
 *.egg
 MANIFEST
 *.egg-info
-tests/unit/app_test/config/config_2.yml
 *.mp4
 *.png
 *.txt
