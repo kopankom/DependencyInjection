@@ -13,7 +13,6 @@ class ServiceHandler(HandlerAbstract):
 
     def add_content_data(self, data):
         self.parse_services(data)
-        # for key in data:
 
     def get_parameter(self, key):
         return self.data.get(key)
@@ -29,10 +28,8 @@ class ServiceHandler(HandlerAbstract):
 
     def parse_services(self, item=None):
         for config_key in item:
-            # print("config key: ", config_key)
             current_object = item[config_key]
             class_loader = ClassExecutor()
-            # print(current_object)
             item[config_key] = self.get_value_binded_item(item[config_key])
             class_loader.set_module_path(current_object['class'])
             if 'arguments' in current_object:
