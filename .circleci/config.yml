@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.7.0
+      - image: circleci/python:3.7.0b5-stretch-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -23,7 +23,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "requirements.txt" }}
+          - v1-dependencies-{{ checksum "requirements.sh" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
@@ -32,12 +32,12 @@ jobs:
           command: |
             python3.7 -m venv venv
             . venv/bin/activate
-            pip install -r requirements.txt
+            sh requirements.sh
 
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
+          key: v1-dependencies-{{ checksum "requirements.sh" }}
 
       # run tests!
       # this example uses Django's built-in test-runner
