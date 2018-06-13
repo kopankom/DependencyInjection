@@ -1,11 +1,11 @@
 import re
 
-from DependencyInjection.ClassExecutor import ClassExecutor
-from DependencyInjection.Container.ContainerAbstract import ContainerAbstract
+from DependencyInjection.Handlers.HandlerAbstract import HandlerAbstract
+from DependencyInjection.Handlers.ServiceHandler.ClassExecutor import ClassExecutor
 from DependencyInjection.ParameterBag import ParameterBag
 
 
-class ServiceHandler(ContainerAbstract):
+class ServiceHandler(HandlerAbstract):
     match_regex = '^@([0-9a-zA-Z\.\_\-]+)$'
     yaml_entry_point = 'services'
     replace_pattern = '@{0}'
@@ -13,7 +13,6 @@ class ServiceHandler(ContainerAbstract):
 
     def add_content_data(self, data):
         self.parse_services(data)
-        # for key in data:
 
     def get_parameter(self, key):
         return self.data.get(key)
@@ -29,10 +28,8 @@ class ServiceHandler(ContainerAbstract):
 
     def parse_services(self, item=None):
         for config_key in item:
-            # print("config key: ", config_key)
             current_object = item[config_key]
             class_loader = ClassExecutor()
-            # print(current_object)
             item[config_key] = self.get_value_binded_item(item[config_key])
             class_loader.set_module_path(current_object['class'])
             if 'arguments' in current_object:

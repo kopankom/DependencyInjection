@@ -1,0 +1,16 @@
+parameters:
+    param1: 'Simple parameter from service file'
+
+services:
+    class_1:
+        class: tests.functional.app_test.src.App.Class1
+        arguments:
+            init_param: '%param1%'
+
+    class_2:
+        class: tests.functional.app_test.src.App.Class2
+        arguments:
+            class1: '@class_1'
+        calls:
+            set_init_param:
+                init_param: '%param4.dictionary.hello_bye%'

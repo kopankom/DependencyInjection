@@ -1,0 +1,13 @@
+parameters:
+    param1: 'Simple parameter'
+    param2: 'Previous param is: %param1%'
+    param3: '"%param1%" is a text from first parameter'
+    param4:
+        array:
+            first:
+              - '%param1%'
+              - 'Some text'
+              - '%param4.array.first.0%'
+        dictionary:
+            hello: 'Cześć'
+            hello_bye: '%param4.dictionary.hello% i narazie'

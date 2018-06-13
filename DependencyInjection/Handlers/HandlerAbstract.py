@@ -1,7 +1,7 @@
 import re
 
 
-class ContainerAbstract():
+class HandlerAbstract():
     match_regex = '^@([0-9a-zA-Z\.\_\-]+)$'
     replace_pattern = '@{0}'
     yaml_entry_point = 'services'
@@ -9,6 +9,8 @@ class ContainerAbstract():
     data = {}
 
     def can_i_handle_this(self, value):
+        if not isinstance(value, str):
+            return False
         return re.search(self.match_regex, value) is not None
 
     def add_content_data(self, data):
@@ -24,6 +26,8 @@ class ContainerAbstract():
         keys_for_bind = re.findall(self.match_regex, value)
         for key in keys_for_bind:
             parameter = self.get_parameter(key)
+            if not isinstance(parameter, str):
+                return parameter
             key = self.replace_pattern.format(key)
             value = value.replace(key, parameter)
         return value

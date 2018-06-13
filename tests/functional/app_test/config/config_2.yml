@@ -1,0 +1,3 @@
+parameters:
+    param5: '%param1% from another file'
+    param6: '%param4.array.first%'
