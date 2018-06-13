@@ -4,7 +4,6 @@ from tests.functional.TestAbstract import TestAbstract
 
 
 class AppTest(TestAbstract):
-
     def test_config_1(self):
         self.add_file('config_1.yml')
 
