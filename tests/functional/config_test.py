@@ -7,6 +7,7 @@ class AppTest(TestAbstract):
     def test_config_1(self):
         self.add_file('config_1.yml')
 
+
         self.assertEqual(self.app.get('parameters').get_parameter('param1'), 'Simple parameter')
         self.assertEqual(self.app.get('parameters').get_parameter('param2'), 'Previous param is: Simple parameter')
         self.assertEqual(self.app.get('parameters').get_parameter('param3'), '"Simple parameter" is a text from first parameter')
