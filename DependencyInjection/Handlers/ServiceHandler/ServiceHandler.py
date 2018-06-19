@@ -11,20 +11,20 @@ class ServiceHandler(HandlerAbstract):
     replace_pattern = '@{0}'
     data = ParameterBag()
 
-    def add_content_data(self, data):
-        self.parse_services(data)
-
     def get_parameter(self, key):
         return self.data.get(key)
 
     def bind_value(self, value):
         service_name = re.findall(self.match_regex, value)
         if len(service_name) != 1:
-            raise Exception('Service not found!')
+            raise KeyError('Service not found!', service_name)
         service_name = service_name[0]
         if not self.data.has(service_name):
-            raise Exception('Service not found!')
+            raise KeyError('Service not found!', service_name)
         return self.data.get(service_name)
+
+    def compile(self):
+        self.parse_services(self.raw_data)
 
     def parse_services(self, item=None):
         for config_key in item:
