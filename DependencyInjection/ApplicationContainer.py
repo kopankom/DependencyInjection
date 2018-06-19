@@ -16,11 +16,22 @@ class ApplicationContainer():
             else:
                 print('No one can handle name: ', entry)
 
-    def bind_value(self, value):
+    def get_handler_able_to_handle_value(self, value):
         for handle in self.handlers:
             if self.handlers[handle].can_i_handle_this(value):
-                value = self.handlers[handle].bind_value(value)
-        return value
+                return self.handlers[handle]
+        return None
+
+    def bind_value(self, value):
+        handler = self.get_handler_able_to_handle_value(value)
+        if None == handler:
+            return value
+        value = handler.bind_value(value)
+        return self.bind_value(value)
+
+    def compile_all_handlers(self):
+        for handle in self.handlers:
+            self.handlers[handle].compile()
 
     def get(self, key):
         return self.handlers[key]

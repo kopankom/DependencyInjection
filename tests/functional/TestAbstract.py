@@ -16,6 +16,12 @@ class TestAbstract(unittest.TestCase):
         self.app.register_yaml_handler(config_handler)
         self.app.register_yaml_handler(services_handler)
 
+    def setDown(self):
+        self.app = None
+
+    def recompile_all(self):
+        self.app.compile_all_handlers()
+
     def add_file(self, file_name):
         file_content = self.load_yaml_file("tests/functional/app_test/config/" + file_name)
         self.app.add_file_content(file_content)
