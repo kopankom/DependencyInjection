@@ -9,13 +9,6 @@ class ApplicationContainer():
         for entry in content:
             self.handlers[entry].add_content_data(content[entry])
 
-    def who_can_handle_this(self, content):
-        for entry in content:
-            if entry in self.handlers:
-                self.handlers[entry].add_content_data(content[entry])
-            else:
-                print('No one can handle name: ', entry)
-
     def get_handler_able_to_handle_value(self, value):
         for handle in self.handlers:
             if self.handlers[handle].can_i_handle_this(value):
