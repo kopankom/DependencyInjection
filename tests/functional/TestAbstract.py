@@ -2,7 +2,7 @@ import unittest
 import yaml
 
 
-from DependencyInjection.ApplicationContainer import ApplicationContainer
+from DependencyInjection.DependencyInjectionContainer import DependencyInjectionContainer
 from DependencyInjection.Handlers.ConfigHandler.ConfigHandler import ConfigHandler
 from DependencyInjection.Handlers.ServiceHandler.ServiceHandler import ServiceHandler
 
@@ -10,11 +10,11 @@ class TestAbstract(unittest.TestCase):
     app = None
 
     def setUp(self):
-        self.app = ApplicationContainer()
+        self.app = DependencyInjectionContainer()
         config_handler = ConfigHandler()
         services_handler = ServiceHandler()
-        self.app.register_yaml_handler(config_handler)
-        self.app.register_yaml_handler(services_handler)
+        self.app.register_yaml_handler(config_handler, 'config')
+        self.app.register_yaml_handler(services_handler, 'services')
 
     def setDown(self):
         self.app = None
