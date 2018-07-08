@@ -1,13 +1,17 @@
-class ApplicationContainer():
+class DependencyInjectionContainer():
     handlers = {}
 
-    def register_yaml_handler(self, yaml_handler):
-        self.handlers[yaml_handler.yaml_entry_point] = yaml_handler
-        self.handlers[yaml_handler.yaml_entry_point].application_container = self
+    def register_yaml_handler(self, yaml_handler, handler_name):
+        yaml_handler.application_container = self
+        self.handlers[handler_name] = yaml_handler
 
     def add_file_content(self, content):
         for entry in content:
-            self.handlers[entry].add_content_data(content[entry])
+            handler = self.get_handler_able_to_handle_this_entry_key(entry)
+            handler.add_content_data(content[entry])
+
+    def get_handler_able_to_handle_this_entry_key(self, key):
+        return [handler for handler in self.handlers.values() if handler.yaml_entry_point == key][0]
 
     def get_handler_able_to_handle_value(self, value):
         for handle in self.handlers:
